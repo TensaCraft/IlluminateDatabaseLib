@@ -1,0 +1,7 @@
+{
+    "require": {
+        "illuminate/events": "^12.14",
+        "illuminate/database": "^12.14",
+        "nesbot/carbon": "^2.0"
+    }
+}
