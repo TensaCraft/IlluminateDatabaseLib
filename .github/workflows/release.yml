@@ -4,9 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release version (eg, 1.2.3)'
+        description: 'Release version (eg 1.2.3 or v1.2.3)'
         required: true
-        default: '1.0.0'
+        default: 'v1.0.0'
+
+permissions:
+  contents: write
 
 jobs:
   release:
@@ -14,6 +17,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Create and run a git tag
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git tag -a "${{ github.event.inputs.version }}" -m "Release ${{ github.event.inputs.version }}"
+          git push origin "${{ github.event.inputs.version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Zip modules directory
         run: |
