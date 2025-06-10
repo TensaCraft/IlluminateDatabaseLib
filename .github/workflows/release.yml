@@ -35,20 +35,13 @@ jobs:
           zip -r ../IlluminateDatabaseLib.zip .
           cd ..
 
-      - name: Create Release
-        id: create_release
+      - name: Create Release and Upload Asset
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.inputs.version }}
           name: Release ${{ github.event.inputs.version }}
           draft: false
           prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload Release Asset
-        uses: softprops/action-gh-release@v2
-        with:
           files: IlluminateDatabaseLib.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
