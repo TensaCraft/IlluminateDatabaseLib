@@ -34,19 +34,12 @@ jobs:
           cd modules
           zip -r ../IlluminateDatabaseLib.zip .
           cd ..
-          # Ensure file is completely written and verify it exists
-          ls -la IlluminateDatabaseLib.zip
-          sleep 2
 
-      - name: Create Release and Upload Asset
-        id: create_release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.event.inputs.version }}
-          name: Release ${{ github.event.inputs.version }}
-          draft: false
-          prerelease: false
-          files: ./IlluminateDatabaseLib.zip
-          fail_on_unmatched_files: false
+      - name: Create GitHub Release and Upload Asset
+        run: |
+          gh release create ${{ github.event.inputs.version }} \
+            --title "Release ${{ github.event.inputs.version }}" \
+            --notes "Release ${{ github.event.inputs.version }}" \
+            IlluminateDatabaseLib.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
