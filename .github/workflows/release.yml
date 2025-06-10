@@ -2,6 +2,11 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (eg, 1.2.3)'
+        required: true
+        default: '1.0.0'
 
 jobs:
   release:
@@ -20,8 +25,8 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: manual-release-${{ github.run_number }}
-          name: Manual Release ${{ github.run_number }}
+          tag_name: ${{ github.event.inputs.version }}
+          name: Release ${{ github.event.inputs.version }}
           draft: false
           prerelease: false
         env:
