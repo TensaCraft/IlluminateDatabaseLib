@@ -47,7 +47,7 @@ class IlluminateDatabaseLibModule extends Module
 
     private function initDebugBar(): void
     {
-        if (!DEBUGGING or !class_exists('DebugBar\DebugBar')) {
+        if (!defined('DEBUGGING') || !DEBUGGING || !class_exists('DebugBar\DebugBar')) {
             return;
         }
 
