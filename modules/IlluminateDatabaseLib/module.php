@@ -10,7 +10,7 @@ use DebugBar\DebugBarException;
 class IlluminateDatabaseLibModule extends Module
 {
     public const NAME = 'IlluminateDatabaseLib';
-    public const VERSION = '1.0.0';
+    public const VERSION = '1.0.1';
     public const NML_VER = '2.2.2';
     public const AUTHOR = '<a href="https://github.com/GIGABAIT93" target="_blank" rel="nofollow noopener">GIGABAIT</a>';
 
